@@ -1,10 +1,10 @@
 /* ###################################################################
 **     Filename    : main.c
-**     Project     : PREN_ALLINONE_V1
+**     Project     : PREN_Distance_Measure_VL6180X_Test
 **     Processor   : MKL25Z128VLK4
 **     Version     : Driver 01.01
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2017-03-15, 19:12, # CodeGen: 0
+**     Date/Time   : 2017-02-27, 15:30, # CodeGen: 0
 **     Abstract    :
 **         Main module.
 **         This module contains user's application code.
@@ -30,17 +30,33 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
-#include "Accel.h"
+#include "GI2C1.h"
+#include "KSDK1.h"
+#include "UTIL1.h"
+#include "CI2C1.h"
 #include "WAIT1.h"
 #include "MCUC1.h"
-#include "ACCEL_GI2C.h"
-#include "ACCEL_CI2C.h"
+#include "TofCE1.h"
+#include "TofCE2.h"
+#include "TofCE3.h"
+#include "TofCE4.h"
+#include "I2C1.h"
+#include "SDA1.h"
+#include "BitIoLdd1.h"
+#include "SCL1.h"
+#include "BitIoLdd2.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
+
+#include "VL6180X.h"
+
+
+
+
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -54,15 +70,11 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
-  uint16_t xyz[2];
 
-  for (;;)
-  {
+  uint8_t status;
 
-	  xyz[0] = Accel_MeasureGetRawX();
-	  xyz[1] = Accel_MeasureGetRawY();
-	  xyz[2]=  Accel_MeasureGetRawZ();
-  }
+VL_Init();
+Measure_TOFCE1();
 
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
